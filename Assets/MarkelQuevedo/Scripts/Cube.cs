@@ -19,15 +19,20 @@ public class Cube : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Asegúrate de que el objeto que colisiona tenga la tag "PlayerWeapon"
         if (other.CompareTag("PlayerWeapon"))
         {
-            if (GameManager.instance != null)
+            if (CompareTag("Cube"))
             {
-                GameManager.instance.CubeDestroyed();
+                GameManager.instance?.CubeDestroyed();
             }
+            else if (CompareTag("Bomb"))
+            {
+                GameManager.instance?.BombDestroyed();
+            }
+
             Destroy(gameObject);
         }
     }
+
 }
 

@@ -5,9 +5,20 @@ using TMPro;  // O "using UnityEngine.UI;" si usas el UI Text legacy
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+
+    void Start()
+    {
+        Debug.Log("Cubes target: " + GameConfig.CubesTarget);
+        Debug.Log("Two swords: " + GameConfig.TwoSwords);
+
+        // Aquí usarías estos valores para ajustar tu lógica:
+        // - Número de cubos a generar
+        // - Activar 1 o 2 sables
+    }
+
+public static GameManager instance;
     public int cubesDestroyed = 0;
-    public int winThreshold = 30;
+    private int winThreshold = GameConfig.CubesTarget;
 
     // Si usas TextMeshPro:
     public TMP_Text scoreText;
@@ -44,6 +55,15 @@ public class GameManager : MonoBehaviour
         if (cubesDestroyed >= winThreshold)
         {
             WinGame();
+        }
+    }
+
+    public void BombDestroyed()
+    {
+        cubesDestroyed -= 1;
+        if (scoreText != null)
+        {
+            scoreText.text = "Cubes Destroyed: " + cubesDestroyed;
         }
     }
 
