@@ -33,6 +33,19 @@ public class Cube : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void OnCorrectHit()
+    {
+        // Lógica para sumar puntos según el tipo de cubo (Cube o Bomb)
+        if (CompareTag("Cube"))
+        {
+            GameManager.instance?.CubeDestroyed();
+        }
+        else if (CompareTag("Bomb"))
+        {
+            GameManager.instance?.BombDestroyed();
+        }
+        Destroy(gameObject);
+    }
 
 }
 
